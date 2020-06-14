@@ -68,11 +68,6 @@ class App extends Component{
         <div className="container">
           <div className="row">
             <div className="col=xs-12 col-sm-6 col-md-6 col-lg-6">
-              <div className="anim-div rain">
-
-              </div>
-            </div>
-            <div className="col=xs-12 col-sm-6 col-md-6 col-lg-6">
             <Form getWeather={this.getWeather}/>
             <Weather
             temperature={this.state.temperature}

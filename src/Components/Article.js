@@ -3,8 +3,11 @@ const Article = (props) => (
   <div className="card">
     <img className="card-img-top" src={props.image} />
     <div className="card-body">
-      <p className="card-text">
+      <h5 className="card-title" >
         {props.title}
+      </h5>
+      <p className="card-text">
+        {props.abstract}
       </p>
       <p>
         {props.author}
