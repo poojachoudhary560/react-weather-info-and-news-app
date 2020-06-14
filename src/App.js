@@ -16,14 +16,16 @@ class App extends Component{
 
   }
   fetchNews1 = async () => {
-    const api_call_weather = await fetch(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=weather&apiKey=e89d2fc5e34148e08a17b9b6f987bcab`);
+    const api_call_weather = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=weather&api-key=daDJsGGLCKI6XxnmkAtGVzQR6jeGcIa5`);
+    // https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=weather&apiKey=e89d2fc5e34148e08a17b9b6f987bcab
     const data_weather = await api_call_weather.json();
     this.setState({
-      newsData: data_weather.articles
+      // newsData: data_weather.articles
+      newsData: data_weather.response.docs
     });
     console.log("-------------------");
     console.log(data_weather);
-    console.log(data_weather.articles.length);
+    console.log(data_weather.response.docs.length);
   }
   getWeather = async (e) => {
     e.preventDefault();

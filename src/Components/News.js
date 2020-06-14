@@ -8,17 +8,19 @@ class News extends Component{
       <div className="row">
         {
 
-          
 
-          this.props.articles
-          .slice(0, 10)
-          .map((article) => {
+
+          this.props.articles.map((article) => {
             console.log(article);
-            if(!article.urlToImage || !article.author) return;
+            // if(!article.urlToImage || !article.author) return;
             return (
               <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 <div className="card-group">
-                  <Article key={article.author} image={article.urlToImage} author={article.author} title={article.title}/>
+                  <Article
+                  key={article._id}
+
+                  author={article.byline.original}
+                  title={article.abstract}/>
                 </div>
 
               </div>
