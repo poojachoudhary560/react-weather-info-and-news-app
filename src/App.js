@@ -4,7 +4,7 @@ import Form from './Components/Form';
 import Weather from './Components/Weather';
 import News from './Components/News'
 const API_KEY = "38743f25f2ff3cf113a5e8b337332a2d";
-const API_KEY_NEWS = "e89d2fc5e34148e08a17b9b6f987bcab";
+
 class App extends Component{
   state = {
     temperature: undefined,
@@ -13,10 +13,10 @@ class App extends Component{
     humidity: undefined,
     description: undefined,
     error: undefined
-    
+
   }
   fetchNews1 = async () => {
-    const api_call_weather = await fetch(`https://newsapi.org/v2/everything?q=weather&apiKey=e89d2fc5e34148e08a17b9b6f987bcab`);
+    const api_call_weather = await fetch(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=weather&apiKey=e89d2fc5e34148e08a17b9b6f987bcab`);
     const data_weather = await api_call_weather.json();
     this.setState({
       newsData: data_weather.articles
