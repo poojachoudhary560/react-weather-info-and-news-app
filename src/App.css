@@ -6,7 +6,12 @@
 }
 .weather-info{
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 1rem;
+  margin-bottom: 2em;
+}
+.weather-info p{
+  margin-bottom: 0px;
+
 }
 .anim-div{
   background: red;

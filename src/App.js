@@ -12,6 +12,11 @@ class App extends Component{
     country: undefined,
     humidity: undefined,
     description: undefined,
+    icon_url: '',
+    wind: {
+      speed: '',
+      degrees: ''
+    },
     error: undefined
 
   }
@@ -41,7 +46,12 @@ class App extends Component{
         country: data.sys.country,
         humidity: data.main.humidity,
         description: data.weather[0].description,
-        error: ''
+        error: '',
+        wind: {
+          speed: data.wind.speed,
+          degrees: data.wind.deg
+        },
+        icon_url: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
       })
     }else{
       this.setState({
@@ -67,7 +77,7 @@ class App extends Component{
         <Title />
         <div className="container">
           <div className="row">
-            <div className="col=xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div className="col=xs-12 col-sm-12 col-md-12 col-lg-12">
             <Form getWeather={this.getWeather}/>
             <Weather
             temperature={this.state.temperature}
@@ -76,7 +86,12 @@ class App extends Component{
             humidity={this.state.humidity}
             description={this.state.description}
             error={this.state.error}
+            icon_url = {this.state.icon_url}
+            wind = {this.state.wind}
             />
+            </div>
+            <div className="col=xs-12 col-sm-6 col-md-6 col-lg-6">
+
             </div>
           </div>
         </div>
