@@ -10,7 +10,11 @@ const Footer = () => (
         style={{ paddingTop: '4em', paddingBottom: '3em' }}
       >
         <p>
-          Website Made by{' '}
+    <img rel="shortcut icon" src={process.env.PUBLIC_URL + '/pclogo1.png'}
+    style={{height: '50px'}}
+   />{'  '}{' '}
+
+          Made by{' '}
           <span style={{ fontWeight: '700', fontSize: '18px' }}>
             Pooja Choudhary
           </span>
