@@ -4,6 +4,7 @@ import Form from './Components/Form';
 import Weather from './Components/Weather';
 import News from './Components/News';
 import Spinner from 'react-bootstrap/Spinner';
+import Footer from './Components/Footer';
 
 const API_KEY = '38743f25f2ff3cf113a5e8b337332a2d';
 
@@ -163,6 +164,7 @@ class App extends Component {
             </div>
           )}
         </div>
+        {this.state.newsData.length > 0 && <Footer /> }
       </Fragment>
     );
   }
