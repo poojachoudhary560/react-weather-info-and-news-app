@@ -14,8 +14,8 @@ const Footer = () => (
     style={{height: '50px'}}
    />{'  '}{' '}
 
-          Made by{' '}
-          <span style={{ fontWeight: '700', fontSize: '18px' }}>
+         <span style={{color: '#e2e5de'}}> Made by</span>{' '}
+          <span style={{ fontWeight: '400', fontSize: '16px', color: '#ffffff' }}>
             Pooja Choudhary
           </span>
         </p>

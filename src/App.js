@@ -111,21 +111,7 @@ class App extends Component {
       country
     });
   };
-  fetchNews = () => {
-    fetch(
-      `https://newsapi.org/v2/everything?q=weather&apiKey=e89d2fc5e34148e08a17b9b6f987bcab`
-    )
-      .then((response) => response.json())
-      .then((data) =>
-        this.setState(
-          {
-            hits: data
-          },
-          console.log('abc  ' + this.state.hits)
-        )
-      )
-      .catch(console.log('error'));
-  };
+
   componentDidMount() {
     this.fetchNews1();
   }
