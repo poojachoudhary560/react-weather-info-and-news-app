@@ -1,6 +1,6 @@
-# WeatherFinder
-
 ![App Header](https://github.com/poojachoudhary560/react-weather-info-and-news-app/blob/master/public/header.png?raw=true)
+
+# WeatherFinder
 
 ## Weather finder is a web application to find current temperature conditions and weather news.
 
@@ -20,3 +20,4 @@
   You will also see any lint errors in the console.
 
 ![Home Page](https://github.com/poojachoudhary560/react-weather-info-and-news-app/blob/master/public/home.png?raw=true =250x)
+<img src="https://github.com/poojachoudhary560/react-weather-info-and-news-app/blob/master/public/home.png?raw=true" alt="home page" width="200">
