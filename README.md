@@ -1,5 +1,7 @@
 # WeatherFinder
 
+![App Header](https://github.com/poojachoudhary560/react-weather-info-and-news-app/blob/master/public/header.png?raw=true)
+
 ## Weather finder is a web application to find current temperature conditions and weather news.
 
 - This project is build in React using Bootstrap library. This project was bootstrapped with [Create React App].
@@ -17,4 +19,4 @@
 - The page will reload if you make edits.<br>
   You will also see any lint errors in the console.
 
-![alt text](https://github.com/poojachoudhary560/react-weather-info-and-news-app/blob/master/home.png?raw=true)
+![Home Page](https://github.com/poojachoudhary560/react-weather-info-and-news-app/blob/master/public/home.png?raw=true =250x)
