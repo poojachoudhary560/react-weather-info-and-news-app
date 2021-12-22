@@ -1,56 +1,66 @@
-import React, { Component, Fragment } from 'react';
-import Title from './Components/Title';
-import Form from './Components/Form';
-import Weather from './Components/Weather';
-import News from './Components/News';
-import Spinner from 'react-bootstrap/Spinner';
-import Footer from './Components/Footer';
-
-const API_KEY = '38743f25f2ff3cf113a5e8b337332a2d';
+import React, { Component, Fragment } from "react";
+import Title from "./Components/Title";
+import Form from "./Components/Form";
+import Weather from "./Components/Weather";
+import News from "./Components/News";
+import Spinner from "react-bootstrap/Spinner";
+import Footer from "./Components/Footer";
 
 class App extends Component {
   state = {
     defaultWeatherVal: {
-      temperature: '',
-      city: '',
-      country: '',
-      humidity: '',
-      description: '',
-      icon_url: '',
+      temperature: "",
+      city: "",
+      country: "",
+      humidity: "",
+      description: "",
+      icon_url: "",
       wind: {
-        speed: '',
-        degrees: ''
-      }
+        speed: "",
+        degrees: "",
+      },
     },
     loadingWeatherInfo: false,
-    temperature: '',
-    city: '',
-    country: '',
-    humidity: '',
-    description: '',
-    icon_url: '',
+    temperature: "",
+    city: "",
+    country: "",
+    humidity: "",
+    description: "",
+    icon_url: "",
     wind: {
-      speed: '',
-      degrees: ''
+      speed: "",
+      degrees: "",
     },
     newsData: [],
-    error: ''
+    error: "",
   };
 
   componentDidUpdate() {
+    const { city, country } = this.state;
     if (this.state.loadingWeatherInfo) {
-      this.getWeather();
+      if (city === "" && country === "") {
+        let newState = {
+          error: "Enter valid input",
+          loadingWeatherInfo: false,
+        };
+        if (this.state.temperature) {
+          newState = { ...this.state.defaultWeatherVal };
+        }
+        this.setState(newState);
+      } else {
+        this.getWeather();
+      }
     }
   }
   fetchNews1 = async () => {
     const api_call_weather = await fetch(
-      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=weather&api-key=daDJsGGLCKI6XxnmkAtGVzQR6jeGcIa5`
+      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=weather&api-key=${process.env.REACT_APP_NEWS_API_KEY}`
     );
     // https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=weather&apiKey=e89d2fc5e34148e08a17b9b6f987bcab
     const data_weather = await api_call_weather.json();
     this.setState({
       // newsData: data_weather.articles
-      newsData: data_weather.response.docs
+      newsData: data_weather.response.docs,
     });
   };
   getWeather = async () => {
@@ -58,14 +68,16 @@ class App extends Component {
 
     try {
       const api_call = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       );
       const data = await api_call.json();
 
       if (data.cod == 404) {
         let newState = {
-          error: data.message || 'Error',
-          loadingWeatherInfo: false
+          error: data.message
+            ? data.message.charAt(0).toUpperCase() + data.message.slice(1)
+            : "Error",
+          loadingWeatherInfo: false,
         };
         if (this.state.temperature) {
           newState = { ...this.state.defaultWeatherVal };
@@ -79,20 +91,20 @@ class App extends Component {
           country: data.sys.country,
           humidity: data.main.humidity,
           description: data.weather[0].description,
-          error: '',
+          error: "",
           wind: {
             speed: data.wind.speed,
-            degrees: data.wind.deg
+            degrees: data.wind.deg,
           },
           loadingWeatherInfo: false,
 
-          icon_url: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+          icon_url: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
         });
       }
     } catch (e) {
       let newState = {
-        error: e.message || 'Error',
-        loadingWeatherInfo: false
+        error: e.message || "Error",
+        loadingWeatherInfo: false,
       };
       if (this.state.temperature) {
         newState = { ...this.state.defaultWeatherVal };
@@ -108,7 +120,7 @@ class App extends Component {
     this.setState({
       loadingWeatherInfo: true,
       city,
-      country
+      country,
     });
   };
 
@@ -119,9 +131,9 @@ class App extends Component {
     return (
       <Fragment>
         <Title />
-        <div className='container'>
-          <div className='row'>
-            <div className='col=xs-12 col-sm-12 col-md-12 col-lg-12'>
+        <div className="container">
+          <div className="row">
+            <div className="col=xs-12 col-sm-12 col-md-12 col-lg-12">
               <Form
                 getWeather={this.getWeatherData}
                 loadingWeatherInfo={this.state.loadingWeatherInfo}
@@ -138,19 +150,19 @@ class App extends Component {
                 wind={this.state.wind}
               />
             </div>
-            <div className='col=xs-12 col-sm-6 col-md-6 col-lg-6'></div>
+            <div className="col=xs-12 col-sm-6 col-md-6 col-lg-6"></div>
           </div>
         </div>
-        <div className='container'>
+        <div className="container">
           {this.state.newsData.length > 0 ? (
             <News articles={this.state.newsData} />
           ) : (
-            <div className='custom-spinner text-center'>
-              <Spinner animation='border' variant='info' />
+            <div className="custom-spinner text-center">
+              <Spinner animation="border" variant="info" />
             </div>
           )}
         </div>
-        {this.state.newsData.length > 0 && <Footer /> }
+        {this.state.newsData.length > 0 && <Footer />}
       </Fragment>
     );
   }
