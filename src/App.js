@@ -72,7 +72,7 @@ class App extends Component {
       );
       const data = await api_call.json();
 
-      if (data.cod == 404) {
+      if (data.cod === 404) {
         let newState = {
           error: data.message
             ? data.message.charAt(0).toUpperCase() + data.message.slice(1)
@@ -84,7 +84,7 @@ class App extends Component {
         }
         this.setState(newState);
       }
-      if (data.cod == 200) {
+      if (data.cod === 200) {
         this.setState({
           temperature: data.main.temp,
           city: data.name,
