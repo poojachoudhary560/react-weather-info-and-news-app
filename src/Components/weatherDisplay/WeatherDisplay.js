@@ -1,163 +1,110 @@
-import React, { Component } from "react";
-class WeatherDisplay extends Component {
-  constructor(props) {
-    super(props);
+import { Constants } from "constants";
+import React, { Fragment, useEffect, useState } from "react";
+import "./weather-display.scss";
+function WeatherDisplay(props) {
+  const [temp, setTemp] = useState("");
+  const [tempUnit, setTempUnit] = useState(Constants.TEMP_CONSTANTS.KELVIN);
 
-    this.state = {
-      tempUnit: "k",
-      temp: "",
-    };
-  }
+  useEffect(() => {
+    setTemp(props.temperature);
+    setTempUnit(Constants.TEMP_CONSTANTS.KELVIN);
+  }, [props.temperature]);
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps, prevState);
-    if (nextProps.temperature !== prevState.temp) {
-      return {
-        temp: nextProps.temperature,
-        tempUnit: "k",
-      };
-    }
-    return null;
-  }
-
-  handleClick = (unit) => {
-    if (this.state.tempUnit !== unit) {
-      this.setState({
-        tempUnit: unit,
-      });
+  const handleClick = (unit) => {
+    if (tempUnit !== unit) {
+      setTempUnit(unit);
     }
   };
-
-  render() {
-    return (
-      <div
-        className="weather-info"
-        style={{
-          marginBottom: this.props.temperature ? "0" : "1em",
-        }}
-      >
-        <div style={{ height: "20px", fontSize: "14px", color: "red" }}>
-          {this.props.error && <span>{this.props.error}</span>}
-        </div>
-        {this.props.temperature && (
-          <>
-            <div
-              className="row location-display"
-              style={{ flexDirection: "column" }}
-            >
-              {this.props.city && this.props.country && (
-                <p style={{ fontSize: "1.5em" }}>
-                  {this.props.city}, {this.props.country}
-                </p>
-              )}
-
-              {this.props.description && <p>{this.props.description}</p>}
-            </div>
-            <div className="row">
-              <div style={{}}>
-                {this.props.icon_url && (
-                  <img
-                    src={this.props.icon_url}
-                    alt="icon"
-                    style={{ width: "100%" }}
-                  />
-                )}
-              </div>
-            </div>
-            <div className="row">
-              <div
-                className="col-xs-1 col-sm-2 col-md-1 col-custom-weather-icon"
-                style={{ padding: "0" }}
-              >
-                {this.props.icon_url && (
-                  <img
-                    src={this.props.icon_url}
-                    alt="icon"
-                    style={{ width: "100%" }}
-                  />
-                )}
-              </div>
-              <div className="col-xs-6 col-sm-6 col-md-3 col-custom-weather-display col-custom">
-                {this.props.temperature && (
-                  <>
-                    <span style={{}} className="temp-display">
-                      {this.state.tempUnit === "k"
-                        ? this.state.temp
-                          ? parseFloat(this.state.temp).toFixed(2)
-                          : ""
-                        : this.state.temp
-                        ? parseFloat(this.state.temp - 273.15).toFixed(2)
-                        : ""}
-                    </span>
-                    {this.state.tempUnit === "k" ? (
-                      <span
-                        onClick={() => this.handleClick("k")}
-                        style={{
-                          fontSize: "28px",
-                          cursor:
-                            this.state.tempUnit === "k" ? "none" : "pointer",
-                          color: this.state.tempUnit === "k" ? "" : "blue",
-                        }}
-                      >
-                        {" "}
-                        K{" "}
-                      </span>
-                    ) : (
-                      <span
-                        onClick={() => this.handleClick("c")}
-                        style={{
-                          cursor:
-                            this.state.tempUnit === "c" ? "none" : "pointer",
-                          color: this.state.tempUnit === "c" ? "" : "blue",
-                          fontSize: "28px",
-                        }}
-                      >
-                        {" "}
-                        &#8451;{" "}
-                      </span>
-                    )}
-                    |
-                    {this.state.tempUnit === "c" ? (
-                      <span
-                        onClick={() => this.handleClick("k")}
-                        style={{
-                          cursor:
-                            this.state.tempUnit === "k" ? "none" : "pointer",
-                          color: this.state.tempUnit === "k" ? "" : "blue",
-                        }}
-                      >
-                        {" "}
-                        K{" "}
-                      </span>
-                    ) : (
-                      <span
-                        onClick={() => this.handleClick("c")}
-                        style={{
-                          cursor:
-                            this.state.tempUnit === "c" ? "none" : "pointer",
-                          color: this.state.tempUnit === "c" ? "" : "blue",
-                        }}
-                      >
-                        {" "}
-                        &#8451;{" "}
-                      </span>
-                    )}
-                  </>
-                )}
-              </div>
-              <div className="col-xs-3 col-sm-3 col-md-3 col-custom-weather-desc col-custom">
-                {this.props.humidity && <p>Humidity: {this.props.humidity}%</p>}
-                {this.props.wind.speed ? (
-                  <p>Wind Speed: {this.props.wind.speed} m/s</p>
-                ) : null}
-              </div>
-              <div className="col-xs-2 col-sm-1 col-md-5 col-custom-weather-empty"></div>
-            </div>
-          </>
-        )}
+  return (
+    <div className="weatherDisplay">
+      <div className="weatherDisplay__error">
+        {props.error && <span>{props.error}</span>}
       </div>
-    );
-  }
+      {props.temperature && (
+        <>
+          <div className="row weatherDisplay__location">
+            {props.city && props.country && (
+              <p className="weatherDisplay__location--content">
+                {props.city}, {props.country}
+              </p>
+            )}
+
+            {props.description && <p>{props.description}</p>}
+          </div>
+          {props.temperature && temp && (
+            <div className="weatherDisplay__temp">
+              <div className="weatherDisplay__tempImg">
+                {props.icon_url && (
+                  <img
+                    src={props.icon_url}
+                    alt="icon"
+                    style={{ width: "100%" }}
+                    className="weatherDisplay__tempImg--content"
+                  />
+                )}
+              </div>
+              <div className="weatherDisplay__tempDetails">
+                <div className="weatherDisplay__tempDetails--units">
+                  <span style={{}} className="temp-display">
+                    {tempUnit === Constants.TEMP_CONSTANTS.KELVIN &&
+                      parseFloat(temp).toFixed(2)}
+
+                    {tempUnit === Constants.TEMP_CONSTANTS.CELSIUS &&
+                      parseFloat(temp - 273.15).toFixed(2)}
+
+                    {tempUnit === Constants.TEMP_CONSTANTS.FAHRENHEIT &&
+                      parseFloat(temp - 273.15).toFixed(2)}
+                  </span>
+
+                  <span
+                    style={{
+                      fontSize: "28px",
+                      color: "red",
+                    }}
+                  >
+                    {String.fromCodePoint(tempUnit)}
+                  </span>
+                  {Object.values(Constants.TEMP_CONSTANTS).map(
+                    (temp_constant) => {
+                      if (temp_constant !== tempUnit) {
+                        return (
+                          <Fragment key={temp_constant}>
+                            {` | `}
+                            <span
+                              onClick={() => handleClick(temp_constant)}
+                              style={{
+                                cursor: "pointer",
+                                color: "blue",
+                              }}
+                            >
+                              {String.fromCodePoint(temp_constant)}{" "}
+                            </span>
+                          </Fragment>
+                        );
+                      }
+                      return null;
+                    }
+                  )}
+                </div>
+                <div className="weatherDisplay__tempDetails--desc">
+                  {props.humidity && (
+                    <p className="weatherDisplay__tempDetails--humidity">
+                      Humidity: {props.humidity}%
+                    </p>
+                  )}
+                  {props.wind.speed ? (
+                    <p className="weatherDisplay__tempDetails--humidity">
+                      Wind Speed: {props.wind.speed} m/s
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
 }
 
 export default WeatherDisplay;

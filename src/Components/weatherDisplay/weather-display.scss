@@ -1,0 +1,60 @@
+@import "../../utils/scss";
+
+.weatherDisplay {
+  font-size: 1rem;
+  margin-bottom: 1em;
+
+  &__error {
+    height: 20px;
+    font-size: 14px;
+    color: red;
+  }
+
+  &__location {
+    flex-direction: column;
+    &--content {
+      font-size: 1.5em;
+      margin-bottom: 0;
+    }
+  }
+
+  &__temp {
+    display: flex;
+    align-items: baseline;
+    &Img {
+      width: 100px;
+      &--content {
+        width: 100%;
+      }
+    }
+
+    &Details {
+      display: flex;
+      flex-direction: column;
+      &--units {
+      }
+
+      &--humidity {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@include md {
+  .weatherDisplay {
+    &__temp {
+      align-items: center;
+
+      &Details {
+        flex-direction: row;
+        &--units {
+          margin-right: 20px;
+        }
+        &--desc {
+          align-self: center;
+        }
+      }
+    }
+  }
+}

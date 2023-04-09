@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Article from "Components/article/Article";
 import "./news.scss";
 
@@ -7,7 +7,7 @@ function News(props) {
     <div className="row">
       {props.articles.map((article) => {
         return (
-          <>
+          <Fragment key={article._id}>
             {article.multimedia.length > 0 ? (
               <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 news__multimedia">
                 <Article
@@ -27,7 +27,7 @@ function News(props) {
             ) : (
               ""
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>
