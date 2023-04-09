@@ -1,18 +1,12 @@
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
+import "./weather-form.scss";
 
-const Form = (props) => (
-  <div
-    className="text-center weather-form"
-    style={
-      {
-        //marginBottom: '2em'
-      }
-    }
-  >
+const WeatherForm = (props) => (
+  <div className="text-center weatherForm">
     <form onSubmit={props.getWeather}>
       <div className="row">
-        <div className="col-sm-12 col-md-4 col-lg-3 form-group-custom">
+        <div className="col-sm-12 col-md-4 col-lg-3 weatherForm__col">
           <input
             className="form-control"
             type="text"
@@ -20,7 +14,7 @@ const Form = (props) => (
             placeholder="City"
           />
         </div>
-        <div className="col-sm-12 col-md-4 col-lg-3 form-group-custom">
+        <div className="col-sm-12 col-md-4 col-lg-3 weatherForm__col">
           <input
             className="form-control"
             type="text"
@@ -29,7 +23,7 @@ const Form = (props) => (
           />
         </div>
         <div
-          className="col-sm-12 col-md-4 col-lg-6 form-group-custom"
+          className="col-sm-12 col-md-4 col-lg-6 weatherForm__col"
           style={{ textAlign: "left" }}
         >
           <button className="btn btn-info">
@@ -55,4 +49,4 @@ const Form = (props) => (
   </div>
 );
 
-export default Form;
+export default WeatherForm;

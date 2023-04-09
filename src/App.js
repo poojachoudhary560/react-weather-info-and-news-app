@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
-import Title from "./Components/Title";
-import Form from "./Components/Form";
-import Weather from "./Components/Weather";
-import News from "./Components/News";
+import Title from "./Components/title/Title";
+import WeatherForm from "Components/weatherForm/WeatherForm";
+import WeatherDisplay from "Components/weatherDisplay/WeatherDisplay";
+import News from "Components/news/News";
 import Spinner from "react-bootstrap/Spinner";
-import Footer from "./Components/Footer";
+import Footer from "Components/footer/Footer";
+// import Footer from "Components/footer/Footer";
 
 class App extends Component {
   state = {
@@ -133,13 +134,13 @@ class App extends Component {
         <Title />
         <div className="container">
           <div className="row">
-            <div className="col=xs-12 col-sm-12 col-md-12 col-lg-12">
-              <Form
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <WeatherForm
                 getWeather={this.getWeatherData}
                 loadingWeatherInfo={this.state.loadingWeatherInfo}
               />
 
-              <Weather
+              <WeatherDisplay
                 temperature={this.state.temperature}
                 city={this.state.city}
                 country={this.state.country}

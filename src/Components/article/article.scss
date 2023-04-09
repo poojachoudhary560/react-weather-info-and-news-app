@@ -1,0 +1,13 @@
+.article {
+  &__title {
+    height: 2.5em;
+    overflow: hidden;
+  }
+  &__content {
+    height: 6em;
+    overflow: hidden;
+  }
+  &__author {
+    height: 3em;
+  }
+}

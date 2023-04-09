@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-class Weather extends Component {
+class WeatherDisplay extends Component {
   constructor(props) {
     super(props);
 
@@ -52,6 +52,17 @@ class Weather extends Component {
               )}
 
               {this.props.description && <p>{this.props.description}</p>}
+            </div>
+            <div className="row">
+              <div style={{}}>
+                {this.props.icon_url && (
+                  <img
+                    src={this.props.icon_url}
+                    alt="icon"
+                    style={{ width: "100%" }}
+                  />
+                )}
+              </div>
             </div>
             <div className="row">
               <div
@@ -149,4 +160,4 @@ class Weather extends Component {
   }
 }
 
-export default Weather;
+export default WeatherDisplay;

@@ -1,0 +1,19 @@
+@import "../../utils/scss";
+.footer {
+  margin-top: 20px;
+  &__content {
+    padding-top: 4em;
+    padding-bottom: 3em;
+    &--img {
+      height: 50px;
+    }
+    &--madeBy {
+      color: #e2e5de;
+    }
+    &--creator {
+      font-weight: 400;
+      font-size: 16px;
+      color: #ffffff;
+    }
+  }
+}

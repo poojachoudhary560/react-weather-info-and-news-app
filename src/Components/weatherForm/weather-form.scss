@@ -1,0 +1,11 @@
+@import "../../utils/scss";
+
+.weatherForm {
+  margin-top: 20px;
+  &__col {
+    margin-bottom: 3px;
+  }
+}
+
+@include md {
+}
